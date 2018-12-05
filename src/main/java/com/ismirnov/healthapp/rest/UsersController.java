@@ -2,6 +2,7 @@ package com.ismirnov.healthapp.rest;
 
 import com.ismirnov.healthapp.persist.UserDAO;
 import com.ismirnov.healthapp.persist.UserEntity;
+import com.ismirnov.healthapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,16 +17,19 @@ import java.util.Set;
 @RestController
 @RequestMapping("/rest/users")
 public class UsersController {
-    @Autowired
-    UserDAO user;
+//    @Autowired
+//    UserDAO user;
 
-    @GetMapping(value = "/{id}", produces = {"application/json"})
-    public UserEntity findItem(@PathVariable Integer id) {
-        return user.searchById(id);
-    }
+    @Autowired
+    UserService userService;
+
+//    @GetMapping(value = "/{id}", produces = {"application/json"})
+//    public UserEntity findItem(@PathVariable Integer id) {
+//        return user.searchById(id);
+//    }
 
     @GetMapping(value = "/email/{email}", produces = {"application/json"})
     public UserEntity findItem(@PathVariable String email) {
-        return user.getByEmail(email);
+        return userService.getByEmail(email);
     }
 }

@@ -23,7 +23,7 @@ public class UserEntityDAO implements UserDAO {
     }
 
     @Override
-    public UserEntity getByEmail(String email) {
+    public UserEntity findByEmail(String email) {
         Session session = this.sessionFactory.getCurrentSession();
         Transaction t = session.beginTransaction();
         Criteria criteria = session.createCriteria(UserEntity.class);
