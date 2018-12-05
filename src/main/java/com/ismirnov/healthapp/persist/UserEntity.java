@@ -1,5 +1,6 @@
 package com.ismirnov.healthapp.persist;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -67,6 +68,7 @@ public class UserEntity implements Serializable {
 
     @Basic
     @Column(name = "password")
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
