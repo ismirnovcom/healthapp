@@ -1,12 +1,14 @@
 package com.ismirnov.healthapp.service;
 
-import com.ismirnov.healthapp.persist.UserDAO;
+import com.ismirnov.healthapp.repositories.UserDAO;
 import com.ismirnov.healthapp.persist.UserEntity;
-import com.ismirnov.healthapp.persist.UserEntityDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(propagation= Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
     UserDAO dao;
 
