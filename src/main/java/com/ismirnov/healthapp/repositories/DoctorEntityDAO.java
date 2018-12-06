@@ -1,12 +1,15 @@
 package com.ismirnov.healthapp.repositories;
 
 import com.ismirnov.healthapp.persist.DoctorEntity;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 @Repository
 public class DoctorEntityDAO implements DoctorDAO {
@@ -16,11 +19,15 @@ public class DoctorEntityDAO implements DoctorDAO {
     public DoctorEntityDAO(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
-    public DoctorEntity findBySpeciality(String speciality) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Criteria criteria = session.createCriteria(DoctorEntity.class);
-        criteria.add(Restrictions.eq("specialityCode", speciality));
-        return (DoctorEntity) criteria.uniqueResult();
+    public List<DoctorEntity> findBySpecialityCode(String speciality) {
+        EntityManager em = sessionFactory.createEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<DoctorEntity> doctorByIdCriteria = cb.createQuery(DoctorEntity.class);
+        Root<DoctorEntity> doctorRoot = doctorByIdCriteria.from(DoctorEntity.class);
+        doctorByIdCriteria.select(doctorRoot);
+        doctorByIdCriteria.where(cb.equal(cb.lower(doctorRoot.get("specialityCode")), speciality.toLowerCase()));
+        return em.createQuery(doctorByIdCriteria).getResultList();
     }
 }

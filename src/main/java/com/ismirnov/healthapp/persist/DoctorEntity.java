@@ -31,7 +31,7 @@ public class DoctorEntity {
 
     private UserEntity user;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     @JsonBackReference
     public UserEntity getUserEntity() {
