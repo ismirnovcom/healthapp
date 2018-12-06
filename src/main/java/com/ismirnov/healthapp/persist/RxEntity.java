@@ -27,27 +27,13 @@ public class RxEntity {
         this.id = id;
     }
 
+    @OneToOne
+    @JoinColumn(name = "USER_ID")
     private UserEntity userId;
-    @ManyToOne
-    @JoinColumn(name = "USER_ID", nullable = false)
-    @JsonBackReference
-    public UserEntity getUserId() {
-        return this.userId;
-    }
-    public void setUserId(UserEntity userId) {
-        this.userId = userId;
-    }
 
+    @OneToOne
+    @JoinColumn(name = "DOCTOR_ID")
     private DoctorEntity doctorId;
-    @ManyToOne
-    @JoinColumn(name = "DOCTOR_ID", nullable = false)
-    @JsonBackReference
-    public DoctorEntity getDoctorId() {
-        return this.doctorId;
-    }
-    public void setDoctorId(DoctorEntity doctorId) {
-        this.doctorId = doctorId;
-    }
 
     @Basic
     @Column(name = "symptoms")

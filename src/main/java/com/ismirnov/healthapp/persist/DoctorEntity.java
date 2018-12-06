@@ -1,17 +1,13 @@
 package com.ismirnov.healthapp.persist;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "DOCTOR", schema = "PUBLIC")
-public class DoctorEntity {
+public class DoctorEntity implements Serializable {
     private int id;
     private String specialityCode;
     private Timestamp createTime;
@@ -31,25 +27,15 @@ public class DoctorEntity {
 
     private UserEntity user;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
-    @JsonBackReference
-    public UserEntity getUserEntity() {
-        return this.user;
+//    @JsonManagedReference
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserEntity(UserEntity user) {
+    public void setUser(UserEntity user) {
         this.user = user;
-    }
-
-    private Set<RxEntity> rxs = new HashSet<>();
-    @OneToMany(mappedBy = "doctorId", targetEntity = RxEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
-    public Set<RxEntity> getRxs() {
-        return rxs;
-    }
-    public void setRxs(Set<RxEntity> rxs) {
-        this.rxs = rxs;
     }
 
     @Basic
@@ -99,7 +85,7 @@ public class DoctorEntity {
     }
 
     public String toString() {
-        return this.getSpecialityCode() +" "+ this.user;
+        return this.getSpecialityCode() + " " + this.user;
     }
 
 }

@@ -17,7 +17,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Repository
-@Transactional(propagation = Propagation.MANDATORY)
+@Transactional
 public class UserEntityDAO implements UserDAO {
     private SessionFactory sessionFactory;
 

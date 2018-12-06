@@ -51,6 +51,7 @@ public class Config {
 //        hibernateProperties.setProperty("hibernate.cache.provider_class", "org.hibernate.cache.internal.NoCachingRegionFactory");
 //        hibernateProperties.setProperty("hibernate.current_session_context_class", "thread");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
+        hibernateProperties.setProperty("hibernate.format_sql", "true");
         hibernateProperties.setProperty("hibernate.jdbc.lob.non_contextual_creation", "true");
         return hibernateProperties;
     }

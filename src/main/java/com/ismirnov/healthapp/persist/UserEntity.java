@@ -1,7 +1,6 @@
 package com.ismirnov.healthapp.persist;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -30,30 +29,6 @@ public class UserEntity implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    private DoctorEntity doctor;
-
-    @OneToOne(mappedBy = "userEntity")
-    @JsonManagedReference
-    public DoctorEntity getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(DoctorEntity doctor) {
-        this.doctor = doctor;
-    }
-
-    private Set<RxEntity> rxs = new HashSet<>();
-
-    @OneToMany(mappedBy = "userId", targetEntity = RxEntity.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
-    public Set<RxEntity> getRxs() {
-        return rxs;
-    }
-
-    public void setRxs(Set<RxEntity> rxs) {
-        this.rxs = rxs;
     }
 
     @Basic
