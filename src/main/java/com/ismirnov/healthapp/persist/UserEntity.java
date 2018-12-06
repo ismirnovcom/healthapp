@@ -1,20 +1,27 @@
 package com.ismirnov.healthapp.persist;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.*;
 
 @Entity
+@Data
 @Table(name = "USER", schema = "PUBLIC")
 public class UserEntity implements Serializable {
-    private int id;
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
+    @JsonIgnore
     private String password;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "age")
     private Integer age;
+    @Column(name = "gender")
     private Integer gender;
 
     private static final long serialVersionUID = 1L;
@@ -23,97 +30,5 @@ public class UserEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq")
     @SequenceGenerator(name = "my_seq", sequenceName = "seq")
     @Column(name = "id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Basic
-    @Column(name = "email")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Basic
-    @Column(name = "password")
-    @JsonIgnore
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Basic
-    @Column(name = "first_name")
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    @Basic
-    @Column(name = "last_name")
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Basic
-    @Column(name = "age")
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    @Basic
-    @Column(name = "gender")
-    public Integer getGender() {
-        return gender;
-    }
-
-    public void setGender(Integer gender) {
-        this.gender = gender;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
-        return id == that.id &&
-                Objects.equals(email, that.email) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName) &&
-                Objects.equals(age, that.age) &&
-                Objects.equals(gender, that.gender);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, email, password, firstName, lastName, age, gender);
-    }
-
-    public String toString() {
-        return "USER: " +
-                "id=" + this.getId() +
-                "; name=" + this.getFirstName() + " " + this.getLastName();
-    }
+    private int id;
 }
