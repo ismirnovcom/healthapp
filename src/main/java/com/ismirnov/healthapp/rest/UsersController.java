@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.List;
+
 @EnableSwagger2
 @RestController
 @RequestMapping("/rest/users")
@@ -25,7 +27,7 @@ public class UsersController {
 //    }
 
     @GetMapping(value = "/email/{email}", produces = {"application/json"})
-    public UserEntity findItem(@PathVariable String email) {
+    public List<UserEntity> findItem(@PathVariable String email) {
         return userService.getByEmail(email);
     }
 }

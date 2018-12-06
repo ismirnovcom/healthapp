@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(propagation= Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity getByEmail(String email) {
+    public List<UserEntity> getByEmail(String email) {
         return this.dao.findByEmail(email);
     }
 }

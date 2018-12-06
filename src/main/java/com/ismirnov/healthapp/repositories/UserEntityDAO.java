@@ -11,6 +11,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import java.util.List;
+
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public class UserEntityDAO implements UserDAO {
@@ -24,16 +29,15 @@ public class UserEntityDAO implements UserDAO {
     @Override
     public UserEntity searchById(Integer id) {
         Session session = this.sessionFactory.getCurrentSession();
-        UserEntity u = session.get(UserEntity.class, id);
-        return u;
+        return session.get(UserEntity.class, id);
     }
 
     @Override
-    public UserEntity findByEmail(String email) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Criteria criteria = session.createCriteria(UserEntity.class);
-        criteria.add(Restrictions.eq("email", email));
-        UserEntity u = (UserEntity) criteria.uniqueResult();
-        return u;
+    public List<UserEntity> findByEmail(String email) {
+        EntityManager em = sessionFactory.createEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<UserEntity> userCriteria = cb.createQuery(UserEntity.class);
+        userCriteria.from(UserEntity.class);
+        return em.createQuery(userCriteria).getResultList();
     }
 }
