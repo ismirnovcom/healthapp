@@ -27,33 +27,4 @@ public class DoctorSearchController {
         return docService.getBySpecialityCode(code);
     }
 	
-/*	final static Logger logger = LoggerFactory.getLogger(DoctorSearchController.class);
-	
-	@Autowired
-	DoctorService docService;
-	
-	@GetMapping(value="/doctor/count")
-	public DoctorInfo getDoctorsCount(ModelMap model) {
-		int count = docService.findCount();
-		return new DoctorInfo("All doctors count", count);
-	}
-    
-	@RequestMapping(value="/doctor/{code}", method= RequestMethod.GET)
-	public DoctorInfo getBySpecialityCode(ModelMap model, @PathVariable("code") String code) {
-		List<Doctor> doctors = docService.findBySpeciality(code);
-		if(doctors == null) {
-			return new DoctorInfo("No Doctors found!", null);
-		}
-		return new DoctorInfo("Doctors found", doctors);
-	}
-	
-	@GetMapping(value="/doctor", produces="application/json")
-	public DoctorInfo findAll(ModelMap model) {
-		
-		List<Doctor> doctors = docService.findAll();
-		if(doctors == null) {
-			return new DoctorInfo("No Doctors found!", null);
-		}
-		return new DoctorInfo("Doctors found", doctors);
-	}*/
 }

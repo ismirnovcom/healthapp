@@ -20,11 +20,11 @@ public class RxEntity {
     @Column(name = "last_updated")
     private Timestamp lastUpdated;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 3L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq")
-    @SequenceGenerator(name = "my_seq", sequenceName = "seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rx_seq")
+    @SequenceGenerator(name = "rx_seq", sequenceName = "seq", allocationSize = 1)
     @Column(name = "id")
     private int id;
 

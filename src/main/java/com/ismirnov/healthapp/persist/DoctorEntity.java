@@ -20,12 +20,12 @@ public class DoctorEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq")
-    @SequenceGenerator(name = "my_seq", sequenceName = "seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doc_seq")
+    @SequenceGenerator(name = "doc_seq", sequenceName = "seq", allocationSize = 1)
     @Column(name = "id")
     private int id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "USER_ID")
+    @OneToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID", nullable = false)
     private UserEntity user;
 }

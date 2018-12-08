@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional(propagation= Propagation.REQUIRED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class UserServiceImpl implements UserService {
     UserDAO dao;
 
@@ -30,5 +30,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserEntity> getByEmail(String email) {
         return this.dao.findByEmail(email);
+    }
+
+    @Override
+    public UserEntity save(UserEntity user) {
+        return dao.save(user);
+    }
+
+    @Override
+    public UserEntity doesUserExist(String email) {
+        List<UserEntity> users = dao.findByEmail(email);
+        if (users.size() > 0) {
+            users.get(0);
+        }
+        return null;
     }
 }

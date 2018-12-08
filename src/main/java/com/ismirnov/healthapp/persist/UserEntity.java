@@ -24,11 +24,11 @@ public class UserEntity implements Serializable {
     @Column(name = "gender")
     private Integer gender;
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 2L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq")
-    @SequenceGenerator(name = "my_seq", sequenceName = "seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @SequenceGenerator(name = "user_seq", sequenceName = "sec", allocationSize = 1)
     @Column(name = "id")
     private int id;
 }
